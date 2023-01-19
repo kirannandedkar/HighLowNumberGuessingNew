@@ -2,8 +2,8 @@
 {
     internal class Program
     {
-        const int MAXDIFFERENCEBETWEENGUESSEDNUMBERS = 5;
-        const int TOTALNUMBEROFGUESSESALLOWED = 5;
+        const int CLOSE_DIFF = 5;
+        const int MAX_GUESSES = 5;
         static void Main(string[] args)
         {
             GuessTheNumber();
@@ -17,33 +17,30 @@
             {
                 Console.WriteLine("Please guess the number");
                 int guessedNumber = Convert.ToInt16(Console.ReadLine());
-                var difference = Math.Abs(guessedNumber - rnd);
-                bool guessedNumberGreaterThanActualNumber = guessedNumber > rnd;
-                bool guessedNumberLessThanActualNumber = guessedNumber < rnd;
-
                 if (guessedNumber == rnd)
                 {
                     Console.WriteLine("Great job you guessed right");
                     return;
                 }
+                int difference = Math.Abs(guessedNumber - rnd);
 
-                if (guessedNumberGreaterThanActualNumber)
+                if (guessedNumber > rnd)
                 {
                     Console.WriteLine("You guesssed too high");
                 }
 
-                if (guessedNumberLessThanActualNumber)
+                if (guessedNumber < rnd)
                 {
                     Console.WriteLine("You guesssed too low");
                 }
 
-                if (difference <= MAXDIFFERENCEBETWEENGUESSEDNUMBERS)
+                if (difference <= CLOSE_DIFF)
                 {
                     Console.WriteLine("You are so close");
                 }
 
                 totalWrongGuesses++;
-            } while (totalWrongGuesses <= TOTALNUMBEROFGUESSESALLOWED);
+            } while (totalWrongGuesses <= MAX_GUESSES);
 
             Console.WriteLine("You entered too many wrong choices");
         }
